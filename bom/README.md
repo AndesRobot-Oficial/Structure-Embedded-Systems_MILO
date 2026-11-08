@@ -58,20 +58,55 @@ Lista de componentes de MILO: todo lo que hay que comprar o fabricar.
 
 | Componente | Modelo / N° de parte | Cant. | Notas |
 |---|---|:-:|---|
-| Driver paso a paso (9–42 V · 0,5–4,0 A) | TB6600 | 7 | |
-| Motor NEMA 23, 1,26 N·m · 2,8 A/fase | StepperOnline 23HS22-2804S1 | 3 | |
+| Driver paso a paso (9–42 V · 0,5–4,0 A) | TB6600 | 7 | Configurados a 800 pasos/rev (1/4 de micropaso); reductores EBA de 38,4:1 → 30 720 pasos por vuelta de articulación |
+| Motor NEMA 23, 1,26 N·m · 2,8 A/fase | StepperOnline 23HS22-2804S1 | 3 | J1, J3 y elevador. **Propuesta para J3:** NEMA 23 2,0 N·m · 2,8 A, 76 mm, eje 6,35 mm (57HS76-3004A635-D21, ~1,1 kg): con 24 V y J3 limitado a ~0,6 rad/s da ~2 kg en la pinza con margen 2× (el actual, ~0,6 kg) |
 | Motor NEMA 23, 2,9 N·m · 3,0 A/fase | 57HS112-3004 | 1 | |
 | Motor NEMA 17, ~0,45 N·m · ~1,5 A/fase | _por confirmar_ | 3 | Confirmar corriente en la etiqueta |
 | Servo digital 20 kg·cm a 6,6 V | Power HD LF-20MG | 1 | |
 
 ## Perfilería
 
+Perfil V-slot de aluminio (0,835 kg/m el 3030, ranura 8). Largos de corte sacados del URDF rev. 1
+([`milo_description`](../milo_description/README.md)). Total: **10,04 m de 3030 + 1,5 m de 6060**.
+
+### Base (500 × 500 × 230 mm)
+
 | Componente | Medida | Cant. | Notas |
 |---|---|:-:|---|
-| | | | |
+| Perfil V-slot 3030 | 440 mm | 12 | Anillos inferior y superior (8), travesaños inferiores largos (2), collar superior de la columna (2, de lado a lado) |
+| Perfil V-slot 3030 | 230 mm | 4 | Verticales de las esquinas |
+| Perfil V-slot 3030 | 173 mm | 3 | Travesaños inferiores cortos (2) y travesaño delantero del collar inferior (1) |
+| Perfil V-slot 3030 | 60 mm | 4 | Topes laterales de la columna, collar inferior (2) y superior (2) |
+
+El **collar** son los 7 perfiles que encierran la columna 6060 por sus 4 caras en el nivel inferior y en el superior de la base.
+
+### Columna y caja trasera
+
+| Componente | Medida | Cant. | Notas |
+|---|---|:-:|---|
+| Perfil V-slot 6060 | 1500 mm | 1 | Columna del elevador |
+| Tapa plástica para 6060 | — | 1 | Extremo superior |
+| Perfil V-slot 3030 | 500 mm | 4 | Verticales de la caja trasera (50 cm de alto, sobre la base) |
+| Perfil V-slot 3030 | 240 mm | 2 | Travesaños traseros, abajo y arriba |
+| Perfil V-slot 3030 | 90 mm | 4 | Travesaños delanteros de la caja, de la columna a las verticales |
+| Perfil V-slot 3030 | 60 mm | 4 | Laterales de la caja, abajo y arriba |
+
+### Placas y estructura
+
+| Componente | Medida | Cant. | Notas |
+|---|---|:-:|---|
+| Plancha de acrílico | 3 mm, 500 × 500 mm | 1 | Piso interior sobre los perfiles de abajo; muescas en las esquinas y agujero para la columna |
+| Placas de carcasa PAI | 2 mm, 0,793 m² | — | Base (lados y tapa; abajo abierta para las ruedas) |
+| Placas de carcasa PAI | 2 mm, 0,431 m² | — | Caja trasera |
+| Soporte de eje SK16 | Ø16 mm | 2 | Eje de cada rueda motriz, bajo el travesaño inferior largo |
+| Rueda loca giratoria 3" con freno | Alto 100 mm, rueda PU Ø75 × 32 | 1 | Más una suplencia de 9,6 mm |
 
 ## Tornillería
 
 | Componente | Medida | Cant. | Notas |
 |---|---|:-:|---|
-| | | | |
+| Escuadra 90° para perfil 3030 | 28 × 28 mm | 74 | Posiciones en el URDF (`herrajes_link`) |
+| Tornillo + tuerca en T para las escuadras | M6 × 12 + tuerca T M6 ranura 8 | 148 + 148 | 2 por escuadra (medida típica para 3030: confirmar con la escuadra comprada) |
+| Anclaje interno 3030 | — | 6 | Uniones del collar inferior, donde no caben escuadras |
+| Tornillo + tuerca en T para los SK16 | M5 + tuerca T M5 ranura 8 | 4 + 4 | |
+| Tornillería de la rueda loca | según placa 62 × 93 mm (agujeros 45 × 75) | 4 | |

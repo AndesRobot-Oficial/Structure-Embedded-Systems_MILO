@@ -77,3 +77,7 @@ El plano de escaneo (+30 mm sobre la base del sensor) es estimado: confirmar con
 - Verificar el yaw de `laser_joint` según cómo quede montado el conector del C1.
 - Calibrar `wheel_radius` y `wheel_separation` en `milo_controllers.yaml`.
 - Pesar las piezas marcadas como estimadas.
+- Componentes del plano eléctrico que todavía no están en el URDF (falta su ubicación):
+  el 7.º TB6600 y el **motor del elevador** (NEMA 23 1,26 N·m, ~0,70 kg); los conversores 42→24 V, 24→12 V y 24→6,6 V
+  (el URDF tiene un solo regulador 36→12 V); hub USB, hub DisplayPort MST, USB-TTL, MPU-9250, WonderMV y la seta de emergencia.
+- La pantalla de la cabeza es la Victron GX Touch 50 del plano; el monitor es el MUCAI N116A de 11,6" (el URDF usa uno genérico de 12").

@@ -7,8 +7,8 @@ Contiene el modelo CAD, el sistema eléctrico de la base y el modelo URDF para R
 
 | Parámetro | Valor |
 |---|---|
-| Dimensiones (L × A × H) | 50 × 50 × 175 cm (provisorio) |
-| Peso | ~31 kg, estimación preliminar |
+| Dimensiones (L × A × H) | 56 × 50 × 161 cm (base 50 × 50; el largo incluye el RPLIDAR, que sobresale al frente; alto hasta la tapa de la columna, brazo plegado) |
+| Peso | ~36,8 kg (URDF rev. 1, con masas de las piezas reales; faltan cables, tornillería y algunos componentes) |
 | Tipo de tracción | Diferencial, 2 motores BLDC de hoverboard 6,5" (control FOC) |
 | Velocidad máxima | 6 km/h |
 | Batería | 2× Li-ion 10S2P 36 V · 4,4 Ah · 158 Wh (316 Wh en total) |
@@ -23,10 +23,10 @@ Contiene el modelo CAD, el sistema eléctrico de la base y el modelo URDF para R
 
 | Área | Estado |
 |---|---|
-| Diseño 3D | ✅ Listo ([modelo CAD](cad/README.md)) |
+| Diseño 3D | 🟡 El URDF rev. 1 tiene cambios que aún no están en el CAD de Fusion ([ver](cad/README.md#cambios-que-faltan-en-el-cad)) |
 | Plano eléctrico | 🟡 Rev. 2.0 lista, pendientes las medidas de seguridad ([revisión](electrica/revision_plano.md)) |
-| URDF | 🟡 Modelo del CAD con masas estimadas |
-| BOM | 🟡 Componentes eléctricos listos; falta perfilería y tornillería |
+| URDF | 🟡 Rev. 1: estructura completa, brazo plegado, masas de piezas reales; faltan componentes del plano eléctrico ([pendientes](milo_description/docs/ROBOT.md#pendiente-antes-del-robot-real)) |
+| BOM | 🟡 Componentes eléctricos, perfilería y tornillería de la estructura listos; falta la tornillería de las carcasas |
 | Fabricación | 🟡 Pendiente la carcasa exterior |
 
 🔲 Pendiente · 🟡 En progreso · ✅ Listo
@@ -38,7 +38,7 @@ Contiene el modelo CAD, el sistema eléctrico de la base y el modelo URDF para R
 ├── bom/              # Lista de componentes
 ├── cad/              # Archivo CAD del robot
 ├── electrica/        # Diagrama de conexiones
-└── milo_description/ # URDF del robot con masas calculadas
+└── milo_description/ # URDF del robot (rev. 1) con masas de las piezas reales
 ```
 
 ## Uso rápido del URDF
