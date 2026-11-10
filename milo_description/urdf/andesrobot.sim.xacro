@@ -97,7 +97,7 @@
 
 <!-- ======================= Diff drive =======================
      Ruedas: diámetro 0.1651 m. Separación CENTRO a CENTRO = 0.3604 m
-     (medida en las mallas; 0.3155 es la distancia entre las caras interiores / orígenes de los joints).
+     (propiedad wheel_separation de andesrobot.urdf.xacro; es también la distancia entre los orígenes de los joints).
      Este plugin hace en la sim lo mismo que el diff_drive_controller + hoverboard en el robot real:
      escucha /cmd_vel (velocidad del robot), mueve cada rueda, y publica la odometría. -->
 <gazebo>
@@ -106,8 +106,8 @@
     <update_rate>50</update_rate>
     <left_joint>left_wheel_joint</left_joint>
     <right_joint>right_wheel_joint</right_joint>
-    <wheel_separation>0.3604</wheel_separation>
-    <wheel_diameter>0.1651</wheel_diameter>
+    <wheel_separation>${wheel_separation}</wheel_separation>
+    <wheel_diameter>${2*wheel_radius}</wheel_diameter>
     <!-- Torque por rueda. Con 20 N·m (40 total) superaba el momento del peso sobre el eje
          (~37 N·m) y el robot hacía "caballito" y se volcaba. 5 N·m sobra para 0.8 m/s² (~1 N·m). -->
     <max_wheel_torque>5</max_wheel_torque>
