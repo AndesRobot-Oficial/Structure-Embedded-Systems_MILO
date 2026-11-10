@@ -26,7 +26,7 @@ y del brazo/pinza/cámara del equipo garra (`milo_ws`, rama `brazo`).
 - El brazo va atornillado **directo a la placa del carro** (sin la base redonda impresa): `arm_base_link_1` es solo un frame.
 
 ## Base diferencial
-- Ruedas de hoverboard 6.5": radio 0.08255 m, **separación 0.3604 m** (centro a centro de la banda).
+- Ruedas de hoverboard 6.5": radio 0.08255 m, **separación 0.3604 m** (centro a centro de la banda). Los joints `left_wheel_joint`/`right_wheel_joint` están en el centro de cada llanta (y = ±0.1802); se cambian con las propiedades `wheel_separation`, `wheel_radius` y `wheel_width` del xacro.
 - Rueda loca de 3" con freno en x = 0.349 m.
 
 ## Masa y estabilidad

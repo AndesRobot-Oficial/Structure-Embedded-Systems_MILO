@@ -39,6 +39,7 @@ def generate_launch_description():
     sim_imu = LaunchConfiguration('sim_imu')                    # IMU simulada sí/no
     use_hardware = LaunchConfiguration('use_hardware')          # ros2_control del hoverboard
     hoverboard_port = LaunchConfiguration('hoverboard_port')    # puerto serie del hoverboard
+    gripper_camera = LaunchConfiguration('gripper_camera')      # cámara Orbbec de la muñeca
 
     # Ruta al URDF principal: install/andesrobot_description/share/andesrobot_description/urdf/...
     xacro_file = PathJoinSubstitution(
@@ -53,7 +54,8 @@ def generate_launch_description():
                  ' sim_lidar:=', sim_lidar,
                  ' sim_imu:=', sim_imu,
                  ' use_hardware:=', use_hardware,
-                 ' hoverboard_port:=', hoverboard_port]), value_type=str)
+                 ' hoverboard_port:=', hoverboard_port,
+                 ' gripper_camera:=', gripper_camera]), value_type=str)
 
     # Lo que devuelve la función: la lista de cosas que el launch va a hacer, en orden.
     return LaunchDescription([
@@ -68,6 +70,8 @@ def generate_launch_description():
         DeclareLaunchArgument('use_hardware', default_value='false',
                               description='true = agrega ros2_control del hoverboard (Milo físico)'),
         DeclareLaunchArgument('hoverboard_port', default_value='/dev/hoverboard'),
+        DeclareLaunchArgument('gripper_camera', default_value='false',
+                              description='true = cámara Orbbec Gemini Plus de la muñeca'),
         # El nodo robot_state_publisher con el URDF generado como parámetro.
         Node(
             package='robot_state_publisher',

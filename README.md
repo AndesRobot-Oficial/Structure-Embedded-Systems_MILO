@@ -23,9 +23,9 @@ Contiene el modelo CAD, el sistema eléctrico de la base y el modelo URDF para R
 
 | Área | Estado |
 |---|---|
-| Diseño 3D | 🟡 El URDF rev. 1 tiene cambios que aún no están en el CAD de Fusion ([ver](cad/README.md#cambios-que-faltan-en-el-cad)) |
+| Diseño 3D | ✅ CAD de Fusion igual al URDF rev. 1, con materiales, masas y articulaciones ([ver](cad/README.md)) |
 | Plano eléctrico | 🟡 Rev. 2.0 lista, pendientes las medidas de seguridad ([revisión](electrica/revision_plano.md)) |
-| URDF | 🟡 Rev. 1: estructura completa, brazo plegado, masas de piezas reales; faltan componentes del plano eléctrico ([pendientes](milo_description/docs/ROBOT.md#pendiente-antes-del-robot-real)) |
+| URDF | ✅ Rev. 1: estructura completa, brazo plegado, masas de piezas reales ([detalles](milo_description/docs/ROBOT.md)) |
 | BOM | 🟡 Componentes eléctricos, perfilería y tornillería de la estructura listos; falta la tornillería de las carcasas |
 | Fabricación | 🟡 Pendiente la carcasa exterior |
 

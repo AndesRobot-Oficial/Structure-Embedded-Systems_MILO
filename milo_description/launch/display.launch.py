@@ -22,7 +22,8 @@ def generate_launch_description():
     # Incluir rsp.launch.py (robot_state_publisher). lock_arm=false: el brazo se puede mover.
     rsp = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution([pkg, 'launch', 'rsp.launch.py'])),
-        launch_arguments={'use_sim_time': 'false', 'lock_arm': 'false'}.items(),
+        launch_arguments={'use_sim_time': 'false', 'lock_arm': 'false',
+                          'gripper_camera': LaunchConfiguration('gripper_camera')}.items(),
     )
 
     # Pose inicial de los sliders = POSE PLEGADA (la misma que queda fija con lock_arm:=true): brazo
@@ -36,6 +37,8 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('gui', default_value='true',
                               description='Sliders de joint_state_publisher_gui'),
+        DeclareLaunchArgument('gripper_camera', default_value='true',
+                              description='Mostrar la cámara Orbbec de la muñeca'),
         rsp,
         # Con gui=true: ventana con un slider por articulación; publica /joint_states.
         # IfCondition = este nodo solo arranca si la condición es verdadera.

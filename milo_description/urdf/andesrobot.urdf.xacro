@@ -499,6 +499,16 @@
     </collision>
     </xacro:unless>
   </link>
+  <!-- MEDIDAS DE LAS RUEDAS MOTRICES (fuente única; las usan los joints y el diff drive de Gazebo).
+       wheel_separation = CENTRO a CENTRO de la banda = 0.3604 m, el mismo valor que usa la navegación
+       (Navegation_MILO: andesrobot_bringup/config/milo_controllers.yaml -> wheel_separation).
+       El origen de cada joint está en el CENTRO de la llanta (plano medio de la banda), así que
+       queda a wheel_separation/2 = 0.1802 m del centro del robot (entre joints: 0.3604).
+       La malla, la colisión y la inercia de cada rueda están centradas en ese origen. -->
+  <xacro:property name="wheel_separation" value="0.3604"/>
+  <xacro:property name="wheel_radius" value="0.08255"/>   <!-- rueda de hoverboard 6.5" -->
+  <xacro:property name="wheel_width" value="0.045"/>      <!-- ancho de la banda, medido de la malla -->
+  <xacro:property name="wheel_joint_y" value="${wheel_separation/2}"/>
   <!-- Rueda motriz izquierda (rueda de hoverboard 6.5", radio 0.08255 m). -->
   <material name="rueda_negra">
     <color rgba="0.10 0.10 0.10 1.0"/>
@@ -506,13 +516,14 @@
   <link name="left_wheel_link_1">
     <!-- Motor rueda hoverboard 6.5" 350 W: ~3 kg (repuesto 36 V 350 W listado en 3 kg; el Parallax de 6.5" pesa 3.6 kg) -->
     <inertial>
-      <origin rpy="0 0 0" xyz="1.69549e-10 -0.0224998 8.55927e-08"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <mass value="3.0000"/>
       <inertia ixx="0.00618025" ixy="0" ixz="0" iyy="0.011348" iyz="0" izz="0.00618025"/>
     </inertial>
     <visual>
-      <!-- Motor rueda hoverboard 6.5" (GrabCAD, John Frank). Ø158.8 mm, eje hacia adentro del robot. -->
-      <origin rpy="0 0 -1.5707963267948966" xyz="0 0.006 0"/>
+      <!-- Motor rueda hoverboard 6.5" (GrabCAD, John Frank). Ø158.8 mm, eje hacia adentro del robot.
+           xyz corre la malla para que el centro de la banda (x = 28.6 mm en la malla) quede en el origen. -->
+      <origin rpy="0 0 -1.5707963267948966" xyz="0 0.0286 0"/>
       <geometry>
         <mesh filename="file://$(find andesrobot_description)/meshes/rueda_hoverboard_6_5.stl" scale="0.001 0.001 0.001"/>
       </geometry>
@@ -521,9 +532,9 @@
     <collision>
       <!-- cilindro ideal: r=0.08255, ancho 0.045 (medido de la malla) -->
       <!-- rpy 1.5708 (90°) en x acuesta el cilindro para que su eje quede a lo ancho, como una rueda. -->
-      <origin rpy="1.5707963267948966 0 0" xyz="0 -0.0225 0"/>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
       <geometry>
-        <cylinder length="0.045" radius="0.08255"/>
+        <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
       </geometry>
     </collision>
   </link>
@@ -531,13 +542,14 @@
   <link name="right_wheel_link_1">
     <!-- Motor rueda hoverboard 6.5" 350 W: ~3 kg (repuesto 36 V 350 W listado en 3 kg; el Parallax de 6.5" pesa 3.6 kg) -->
     <inertial>
-      <origin rpy="0 0 0" xyz="1.69549e-10 0.0224998 -2.02646e-09"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
       <mass value="3.0000"/>
       <inertia ixx="0.00618025" ixy="0" ixz="0" iyy="0.011348" iyz="0" izz="0.00618025"/>
     </inertial>
     <visual>
-      <!-- Motor rueda hoverboard 6.5" (GrabCAD, John Frank). Ø158.8 mm, eje hacia adentro del robot. -->
-      <origin rpy="0 0 1.5707963267948966" xyz="0 -0.006 0"/>
+      <!-- Motor rueda hoverboard 6.5" (GrabCAD, John Frank). Ø158.8 mm, eje hacia adentro del robot.
+           xyz corre la malla para que el centro de la banda (x = 28.6 mm en la malla) quede en el origen. -->
+      <origin rpy="0 0 1.5707963267948966" xyz="0 -0.0286 0"/>
       <geometry>
         <mesh filename="file://$(find andesrobot_description)/meshes/rueda_hoverboard_6_5.stl" scale="0.001 0.001 0.001"/>
       </geometry>
@@ -545,9 +557,9 @@
     </visual>
     <collision>
       <!-- cilindro ideal: r=0.08255, ancho 0.045 (medido de la malla) -->
-      <origin rpy="1.5707963267948966 0 0" xyz="0 0.0225 0"/>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0 0"/>
       <geometry>
-        <cylinder length="0.045" radius="0.08255"/>
+        <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
       </geometry>
     </collision>
   </link>
@@ -948,7 +960,7 @@
   </joint>
   <!-- Rueda izquierda: gira sin límite. Este nombre lo usan el diff drive simulado y ros2_control. -->
   <joint name="left_wheel_joint" type="continuous">
-    <origin rpy="0 0 3.141592653589793" xyz="0 0.15775 -0.0068"/>
+    <origin rpy="0 0 3.141592653589793" xyz="0 ${wheel_joint_y} -0.0068"/>
     <parent link="base_link"/>
     <child link="left_wheel_link_1"/>
     <axis xyz="0.0 -1.0 0.0"/>
@@ -958,7 +970,7 @@
      velocidad positiva = rueda avanza hacia +X (adelante). -->
   <!-- Rueda derecha. -->
   <joint name="right_wheel_joint" type="continuous">
-    <origin rpy="0 0 3.141592653589793" xyz="0 -0.15775 -0.0068"/>
+    <origin rpy="0 0 3.141592653589793" xyz="0 ${-wheel_joint_y} -0.0068"/>
     <parent link="base_link"/>
     <child link="right_wheel_link_1"/>
     <axis xyz="0.0 -1.0 0.0"/>
