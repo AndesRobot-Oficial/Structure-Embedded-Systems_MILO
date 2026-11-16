@@ -25,6 +25,7 @@ Contiene el modelo CAD, el sistema eléctrico de la base y el modelo URDF para R
 |---|---|
 | Diseño 3D | ✅ CAD de Fusion igual al URDF rev. 1, con materiales, masas y articulaciones ([ver](cad/README.md)) |
 | Plano eléctrico | 🟡 Rev. 2.0 lista, pendientes las medidas de seguridad ([revisión](electrica/revision_plano.md)) |
+| Driver de la base | ✅ `base_driver_node` (hoverboard) con seta de emergencia, probado en el robot el 16-11-2026 ([detalles](milo_base_driver/README.md)) |
 | URDF | ✅ Rev. 1: estructura completa, brazo plegado, masas de piezas reales ([detalles](milo_description/docs/ROBOT.md)) |
 | BOM | 🟡 Componentes eléctricos, perfilería y tornillería de la estructura listos; falta la tornillería de las carcasas |
 | Fabricación | 🟡 Pendiente la carcasa exterior |
@@ -38,6 +39,7 @@ Contiene el modelo CAD, el sistema eléctrico de la base y el modelo URDF para R
 ├── bom/              # Lista de componentes
 ├── cad/              # Archivo CAD del robot
 ├── electrica/        # Diagrama de conexiones
+├── milo_base_driver/ # Driver ROS 2 de la base (hoverboard) y seta de emergencia
 └── milo_description/ # URDF del robot (rev. 1) con masas de las piezas reales
 ```
 
