@@ -3,6 +3,16 @@
 Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/).
 
 ## [Sin publicar]
+### Agregado
+- `milo_base_driver`: driver ROS 2 de la base (paquete `hoverboard_bridge`, nodo `base_driver_node`) para la placa
+  del hoverboard con firmware hack-FOC: `cmd_vel` → ruedas, odometría (`/base/odom` + TF; copia en `/odom`),
+  batería y parámetros probados en el robot (10/11-11-2026). Interfaces según el contrato de AndesRobot.
+- Seta de emergencia física (pin 7 del Jetson, pull-down por overlay): la lee el driver y publica
+  `/base/emergency_stop`; al soltarla, el robot sigue detenido hasta rearmarla (`/base/emergency_stop/rearmar`).
+  Overlay, script de prueba y pruebas de fallas en `milo_base_driver/seta_emergencia/`.
+### Corregido
+- Driver: un `cmd_vel` con NaN se convertía en velocidad máxima hacia adelante; ahora NaN/inf = parar.
+- Driver: los valores por defecto del código ahora son los del yaml probado.
 ### Cambiado
 - CAD de Fusion actualizado al URDF rev. 1 y marcado como listo: bastidor V-slot, escuadras, placas, columna 6060,
   CAD de fabricante (ruedas, placa del hoverboard, Jetson, Arduino, TB6600, regulador, RPLIDAR C1), baterías, IMU,
